@@ -22,16 +22,16 @@ except socket.error:
 #now keep talking with the client
 while 1:
 	# receive data from client (data, addr)
-	d = s.recvfrom(1024)
+	d = serverSocket.recvfrom(1024)
 	data = d[0]
 	addr = d[1]
 	
 	if not data: 
 		break
 	
-	reply = 'OK...' + data
+	reply = 'OK...' + data.decode()
 	
-	s.sendto(reply , addr)
-	print 'Message[' + addr[0] + ':' + str(addr[1]) + '] - ' + data.strip()
+	serverSocket.sendto(reply.encode() , addr)
+	#print ('Message [' + addr[0] + ':' + str(addr[1]) + '] - ' + data.strip())
 	
-s.close()
+serverSocket.close()
