@@ -19,19 +19,17 @@ except socket.error:
     print('Failed to create socket')
     sys.exit()
 
-#now keep talking with the client
+#loop to keep talking with the client
 while 1:
-	# receive data from client (data, addr)
+	
+	# receive data from client 
 	d = serverSocket.recvfrom(1024)
-	data = d[0]
+	data = d[0].decode()
 	addr = d[1]
-	
-	if not data: 
-		break
-	
-	reply = 'OK...' + data.decode()
+	print('# Received data from client')
+	reply = data.upper()
 	
 	serverSocket.sendto(reply.encode() , addr)
-	#print ('Message [' + addr[0] + ':' + str(addr[1]) + '] - ' + data.strip())
+	print ('Message sent [' + addr[0] + ':' + str(addr[1]) + '] - ' + reply)
 	
 serverSocket.close()

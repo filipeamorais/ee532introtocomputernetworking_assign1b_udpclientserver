@@ -26,13 +26,11 @@ while(1) :
         full_reply = ''
         #while True:
         reply = s.recvfrom(1024)
-        if len(reply) == 0:
+        if len(reply[0]) == 0:
             break
-        full_reply += reply.decode()
+        full_reply += reply[0].decode()
 
         print (full_reply)
-
-        print('# Finished!')
 
     except socket.error:
         print('Failed to send the message')
